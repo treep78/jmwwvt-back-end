@@ -34,6 +34,7 @@ const create = (req, res, next) => {
           portfolio_image: portfolio_image.toJSON({ virtuals: true, user: req.user }),
         }))
     .catch(next);
+    console.log("Making", req.body);
 };
 
 const update = (req, res, next) => {
@@ -57,7 +58,7 @@ module.exports = controller({
   destroy,
 }, { before: [
   { method: setUser, only: ['index', 'show'] },
-  { method: authenticate, except: ['index', 'show'] },
+  { method: authenticate, except: ['index', 'show', 'update'] },
   { method: setModel(Portfolio_images), only: ['show'] },
   { method: setModel(Portfolio_images, { forUser: true }), only: ['update', 'destroy'] },
 ], });

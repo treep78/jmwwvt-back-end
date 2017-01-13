@@ -9,7 +9,7 @@ const portfolio_imageSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    required: true,
+    required: false,
   },
   description: {
     type: String,

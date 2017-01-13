@@ -1,6 +1,6 @@
 'use strict';
 
-const debug = require('debug')('express-api-template:error-handler');
+const debug = require('debug')('jmwwvt-back-end:error-handler');
 
 const errorHandler = (err, req, res, next) => {
   //jshint unused:false

@@ -72,6 +72,7 @@ const signin = (req, res, next) => {
       user = user.toObject();
       delete user.passwordDigest;
       user.token = encodeToken(user.token);
+      console.log('token: ',user.token);
       res.json({ user });
     })
     .catch(makeErrorHandler(res, next));

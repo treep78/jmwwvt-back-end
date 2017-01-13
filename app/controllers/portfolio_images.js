@@ -58,7 +58,7 @@ module.exports = controller({
   destroy,
 }, { before: [
   { method: setUser, only: ['index', 'show'] },
-  { method: authenticate, except: ['index', 'show', 'update'] },
+  { method: authenticate, except: ['index', 'show'] },
   { method: setModel(Portfolio_images), only: ['show'] },
   { method: setModel(Portfolio_images, { forUser: true }), only: ['update', 'destroy'] },
 ], });

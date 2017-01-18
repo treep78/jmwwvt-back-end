@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const exampleSchema = new mongoose.Schema({
+const emailSchema = new mongoose.Schema({
   sender: {
     type: String,
     required: true,
@@ -19,10 +19,10 @@ const exampleSchema = new mongoose.Schema({
   timestamps: true,
 });
 
-exampleSchema.virtual('length').get(function length() {
+emailSchema.virtual('length').get(function length() {
   return this.text.length;
 });
 
-const Example = mongoose.model('Example', exampleSchema);
+const Email = mongoose.model('Email', emailSchema);
 
-module.exports = Example;
+module.exports = Email;

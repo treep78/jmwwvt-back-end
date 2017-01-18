@@ -3,6 +3,7 @@
 const controller = require('lib/wiring/controller');
 const models = require('app/models');
 const Portfolio_images = models.portfolio_image;
+const Categories = models.category;
 
 const authenticate = require('./concerns/authenticate');
 const setUser = require('./concerns/set-current-user');
@@ -27,14 +28,15 @@ const create = (req, res, next) => {
   let portfolio_image = Object.assign(req.body.portfolio_image, {
     _owner: req.user._id,
   });
+let category = Object.assign({category: req.body.portfolio_image.category}, {_owner: req.user._id,});
   Portfolio_images.create(portfolio_image)
     .then(portfolio_image =>
       res.status(201)
         .json({
           portfolio_image: portfolio_image.toJSON({ virtuals: true, user: req.user }),
         }))
+    .then(Categories.create(category))
     .catch(next);
-    console.log("Making", req.body);
 };
 
 const update = (req, res, next) => {

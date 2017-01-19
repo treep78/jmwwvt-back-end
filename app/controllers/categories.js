@@ -20,12 +20,15 @@ const index = (req, res, next) => {
         }
       }
       let tagsA = [];
+      let j=1;
       for(let i in tags) {
         let temp = {};
-        temp._id = 6;
-        temp[i] = tags[i];
-        temp.id = 6;
+        temp._id = j+'';
+        temp.category = i;
+        temp.count = tags[i]+'';
+        temp.id = j+'';
         tagsA.push(temp);
+        j+=1;
       }
       console.log(tagsA);
       //tags.id='587ffef41a6013eb19c098a0';

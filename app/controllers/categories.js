@@ -10,10 +10,31 @@ const setModel = require('./concerns/set-mongoose-model');
 
 const index = (req, res, next) => {
   Categories.find()
-    .then(categories => res.json({
-      categories: categories.map((e) =>
-        e.toJSON({ virtuals: true, user: req.user })),
-    }))
+    .then(categories => {
+      let tags = {};
+      for(let tag in categories){
+        if(tags[categories[tag].category]) {
+          tags[categories[tag].category] += 1;
+        } else {
+          tags[categories[tag].category] = 1;
+        }
+      }
+      let tagsA = [];
+      for(let i in tags) {
+        let temp = {};
+        temp._id = 6;
+        temp[i] = tags[i];
+        temp.id = 6;
+        tagsA.push(temp);
+      }
+      console.log(tagsA);
+      //tags.id='587ffef41a6013eb19c098a0';
+      res.json({'categories': tagsA});
+      // res.json({
+      //   categories: tagsA.map((e) =>
+      //     e.toJSON({ virtuals: true, user: req.user })),
+      // });
+    })
     .catch(next);
 };
 

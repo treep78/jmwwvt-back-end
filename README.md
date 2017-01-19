@@ -1,4 +1,4 @@
-# Mod Squad Back End for E-Commerce
+# Capstone Project Back-End Readme
 
 - Deployed Back-end: https://safe-bayou-26348.herokuapp.com
 - Deployed Front-end: https://treep78.github.io/jmwwvt-front-end/

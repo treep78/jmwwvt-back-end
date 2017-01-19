@@ -2,17 +2,17 @@
 
 const controller = require('lib/wiring/controller');
 const models = require('app/models');
-const Email = models.email;
+//const Email = models.email;
 
 const authenticate = require('./concerns/authenticate');
 const setUser = require('./concerns/set-current-user');
 const setModel = require('./concerns/set-mongoose-model');
 
-const mail = require('mail').Mail({
-  host: 'smtp.gmail.com',
-  username: 'me@gmail.com',
-  password: '**password**'
-});
+// const mail = require('mail').Mail({
+//   host: 'smtp.gmail.com',
+//   username: 'me@gmail.com',
+//   password: '**password**'
+// });
 
 const index = (req, res, next) => {
   Email.find()
@@ -29,20 +29,20 @@ const show = (req, res) => {
   });
 };
 
-const sendMail = (req, res, next) => {
-  mail.message({
-    from: 'sender@example.net',
-    to: ['recipient@somewhere.org'],
-    subject: 'Hello from Node.JS'
-  })
-  .body('Node speaks SMTP!')
-  .send(function(err) {
-    if (err) {
-      throw err;
-    }
-    console.log('Sent!');
-  });
-};
+// const sendMail = (req, res, next) => {
+//   mail.message({
+//     from: 'sender@example.net',
+//     to: ['recipient@somewhere.org'],
+//     subject: 'Hello from Node.JS'
+//   })
+//   .body('Node speaks SMTP!')
+//   .send(function(err) {
+//     if (err) {
+//       throw err;
+//     }
+//     console.log('Sent!');
+//   });
+// };
 
 const create = (req, res, next) => {
   let email = Object.assign(req.body.email, {

@@ -30,13 +30,29 @@ const create = (req, res, next) => {
   });
 let category = Object.assign({category: req.body.portfolio_image.category}, {_owner: req.user._id,});
   Portfolio_images.create(portfolio_image)
-    .then(portfolio_image =>
-      res.status(201)
-        .json({
-          portfolio_image: portfolio_image.toJSON({ virtuals: true, user: req.user }),
-        }))
-    .then(Categories.create(category))
-    .catch(next);
+    .then(portfolio_image => {
+      let link = portfolio_image.link.split('');
+      let success=false;
+      for(let i=0; i<link.length;i++) {
+        if(link[i] === '.'){
+          let ext = link[i+1]+link[i+2]+link[i+3];
+          if(ext === 'png' || ext === 'jpg') {
+            success=true;
+            res.status(201)
+              .json({
+                portfolio_image: portfolio_image.toJSON({ virtuals: true, user: req.user }),
+              })
+              .then(Categories.create(category))
+              .catch(next);
+            }
+            break;
+          }
+        }
+        if(!success){
+          res.status(400).json({ error: 'must me a .png or .jpg link. Also please don\'t send CURL requests, use the app.'});
+        }
+      })
+      .catch(next);
 };
 
 const update = (req, res, next) => {
